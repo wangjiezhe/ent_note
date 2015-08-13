@@ -9,3 +9,6 @@
 .ropeproject/
 *.pyc
 __pycache__/
+
+# generated
+*.png
