@@ -1,0 +1,11 @@
+# vim
+*~ *.swp
+
+# reference
+*.pdf
+*.djvu
+
+# python
+.ropeproject/
+*.pyc
+__pycache__/
