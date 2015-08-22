@@ -1,5 +1,9 @@
 # vim
-*~ *.swp
+*~
+*.swp
+
+# backup
+*.bak
 
 # reference
 *.pdf
