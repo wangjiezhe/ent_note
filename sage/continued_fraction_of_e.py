@@ -64,3 +64,4 @@ G = symbolic_expression(t**n * (t - Integer(1))**n /
 __tmp__ = var("n")
 T = symbolic_expression(G.integral(t, Integer(0), Integer(1))).function(n)
 print([T(j) for j in range(Integer(10))])
+print([T(j).n() for j in range(Integer(10))])
