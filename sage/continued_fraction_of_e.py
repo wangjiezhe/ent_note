@@ -2,10 +2,27 @@
 # coding: utf-8
 
 from __future__ import print_function
-from functools import partial
+# from functools import partial
+from functools import wraps
 from sage.all import Integer, e, var, symbolic_expression, factorial
 
 
+def cache(func):
+    caches = {}
+
+    @wraps(func)
+    def _cache(*args, **kw):
+        key = func.func_name + str(args)
+        if key in caches:
+            return caches[key]
+        result = func(*args, **kw)
+        caches[key] = result
+        return caches[key]
+
+    return _cache
+
+
+@cache
 def series_z(m, m0, m1):
     if m == Integer(0):
         return m0
@@ -16,8 +33,17 @@ def series_z(m, m0, m1):
                 series_z(m - Integer(1), m0, m1) +
                 series_z(m - Integer(2), m0, m1))
 
-series_x = partial(series_z, m0=Integer(1), m1=Integer(3))
-series_y = partial(series_z, m0=Integer(1), m1=Integer(1))
+
+def series_x(m):
+    return series_z(m, Integer(1), Integer(3))
+
+
+def series_y(m):
+    return series_z(m, Integer(1), Integer(1))
+
+
+# series_x = partial(series_z, m0=Integer(1), m1=Integer(3))
+# series_y = partial(series_z, m0=Integer(1), m1=Integer(1))
 
 
 def series_e(m):
