@@ -82,12 +82,18 @@ def main2():
 
 
 def main3():
-    timeit('series_x(Integer(100))')
-    timeit('series_y(Integer(100))')
-    timeit('series_e(Integer(100))')
-    timeit('series_x_nocache(Integer(100))')
-    timeit('series_y_nocache(Integer(100))')
-    timeit('series_e_nocache(Integer(100))')
+    timeit('[series_x(Integer(k)) for k in range(1000)]',
+           number=100, repeat=5)
+    timeit('[series_y(Integer(k)) for k in range(1000)]',
+           number=100, repeat=5)
+    timeit('[series_e(Integer(k)) for k in range(1000)]',
+           number=100, repeat=5)
+    timeit('[series_x_nocache(Integer(k)) for k in range(1000)]',
+           number=100, repeat=5)
+    timeit('[series_y_nocache(Integer(k)) for k in range(1000)]',
+           number=100, repeat=5)
+    timeit('[series_e_nocache(Integer(k)) for k in range(1000)]',
+           number=100, repeat=5)
 
 
 if __name__ == "__main__":
