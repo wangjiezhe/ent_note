@@ -1,29 +1,14 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from functools import wraps, partial
+from functools import lru_cache, partial
 from timeit import timeit
 from numpy import exp
 from scipy.special import factorial
 from scipy.integrate import quad
 
 
-def cache(func):
-    caches = {}
-
-    @wraps(func)
-    def _cache(*args, **kw):
-        key = str(func) + str(args)
-        if key in caches:
-            return caches[key]
-        result = func(*args, **kw)
-        caches[key] = result
-        return caches[key]
-
-    return _cache
-
-
-@cache
+@lru_cache(maxsize=None)
 def series_z(m, m0, m1):
     if m == 0:
         return m0
